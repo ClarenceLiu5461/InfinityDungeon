@@ -7,12 +7,12 @@ public class RoomGenerator : MonoBehaviour
     public enum Direction {LeftUp,MidUp,RightUp,LeftCenter,MidCenter,RightCenter,LeftBottom,MidBottom,RightBottom};
     public Direction direction;
 
-    [Header("房間資訊")]
+    [Header("Room Information")]
     public GameObject roomPrefab;
     public int roomNumber;
     public int generateRoom = 0;
 
-    [Header("位置控制")]
+    [Header("Position Control")]
     public Transform generatorPoint;
     public float roomMove;
 
@@ -22,10 +22,10 @@ public class RoomGenerator : MonoBehaviour
     {
         for (int i = 0; i < roomNumber; i++)
         {
-            //改變Point位置
+            //Change Point Position
             ChangePointPos();
             generateRoom++;
-            //生成房間
+            //Generate Rooms
             Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity);
             generatorPoint.position = new Vector3(0, 0, 0);
         }
