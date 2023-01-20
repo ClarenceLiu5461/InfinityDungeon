@@ -6,6 +6,7 @@ public class RoomGenerator : MonoBehaviour
 {
     public enum Direction {LeftUp,MidUp,RightUp,LeftCenter,MidCenter,RightCenter,LeftBottom,MidBottom,RightBottom};
     public Direction direction;
+    GameObject Player;
 
     [Header("Room Information")]
     public GameObject roomPrefab;
@@ -20,6 +21,7 @@ public class RoomGenerator : MonoBehaviour
 
     void Start()
     {
+        this.Player = GameObject.Find("Player");
         for (int i = 0; i < roomNumber; i++)
         {
             //Change Point Position
@@ -69,6 +71,14 @@ public class RoomGenerator : MonoBehaviour
             case Direction.RightBottom:
                 generatorPoint.position += new Vector3(roomMove, 0, -roomMove);
                 break;
+        }
+    }
+
+    public void OnColliderEnter(Collision Main)
+    {
+        if (Main.collider.name.Contains("door"))
+        {
+            generatorPoint.position = new Vector3(0, 0, 0);
         }
     }
 }
