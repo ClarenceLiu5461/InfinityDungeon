@@ -4,9 +4,6 @@ namespace Invector.vCharacterController
 {
     public class vThirdPersonController : vThirdPersonAnimator
     {
-        //float roomMove;
-        //public enum Direction {LeftDoor,UpDoor,RightDoor,BottomDoor}
-        //public Direction direction;
         public virtual void ControlAnimatorRootMotion()
         {
             if (!this.enabled) return;
@@ -128,14 +125,24 @@ namespace Invector.vCharacterController
                 animator.CrossFadeInFixedTime("JumpMove", .2f);
         }
 
-        /*
         public void OnColliderEnter(Collision Main)
         {
             if (Main.collider.name.Contains("LeftDoor"))
             {
-                GameObject.Find("generatorPoint").transform.position = new Vector3(-roomMove, 0, 0);
+                GameObject.Find("generatorPoint").transform.position = new Vector3(-RoomGenerator.roomMove, 0, 0);
+            }
+            if (Main.collider.name.Contains("UpDoor"))
+            {
+                GameObject.Find("generatorPoint").transform.position = new Vector3(0, 0, +RoomGenerator.roomMove);
+            }
+            if (Main.collider.name.Contains("RightDoor"))
+            {
+                GameObject.Find("generatorPoint").transform.position = new Vector3(+RoomGenerator.roomMove, 0, 0);
+            }
+            if (Main.collider.name.Contains("BottomDoor"))
+            {
+                GameObject.Find("generatorPoint").transform.position = new Vector3(0, 0, -RoomGenerator.roomMove);
             }
         }
-        */
     }
 }
