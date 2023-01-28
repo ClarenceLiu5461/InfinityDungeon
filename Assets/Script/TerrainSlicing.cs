@@ -48,14 +48,14 @@ public class TerrainSlicing : MonoBehaviour
                         StopCoroutine(val.Cor);
                         DictTemp.Add((i, j), val.Go);
                         UnloadTerrCountDown.Remove((i, j));
-                        val.Go.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                        val.Go.transform.position = new Vector3(i * 11f, 0f, j * 11f);
                         val.Go.SetActive(true);
                     }
                     else
                     {
                         var newTerr = GetTerrain(); //Generate terrain
                         DictTemp.Add((i, j), newTerr);
-                        newTerr.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                        newTerr.transform.position = new Vector3(i * 11f, 0f, j * 11f);
                         newTerr.SetActive(true);
                     }
                 }
