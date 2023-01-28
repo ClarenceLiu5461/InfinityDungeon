@@ -124,25 +124,5 @@ namespace Invector.vCharacterController
             else
                 animator.CrossFadeInFixedTime("JumpMove", .2f);
         }
-
-        public void OnColliderEnter(Collision Main)
-        {
-            if (Main.collider.name.Contains("LeftDoor"))
-            {
-                GameObject.Find("generatorPoint").transform.position = new Vector3(-RoomGenerator.roomMove, 0, 0);
-            }
-            if (Main.collider.name.Contains("UpDoor"))
-            {
-                GameObject.Find("generatorPoint").transform.position = new Vector3(0, 0, +RoomGenerator.roomMove);
-            }
-            if (Main.collider.name.Contains("RightDoor"))
-            {
-                GameObject.Find("generatorPoint").transform.position = new Vector3(+RoomGenerator.roomMove, 0, 0);
-            }
-            if (Main.collider.name.Contains("BottomDoor"))
-            {
-                GameObject.Find("generatorPoint").transform.position = new Vector3(0, 0, -RoomGenerator.roomMove);
-            }
-        }
     }
 }
