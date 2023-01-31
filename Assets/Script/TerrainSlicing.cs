@@ -64,7 +64,81 @@ public class TerrainSlicing : MonoBehaviour
         (TerrainLoaded, DictTemp) = (DictTemp, TerrainLoaded);
     }
 
-    ///Get a terrain object
+    private void FixedUpdate()
+    {
+        if (Player != null)
+        {
+            //Record player position on the map
+            (int x, int y) pos = (Mathf.RoundToInt(Player.transform.position.x / 10f), Mathf.RoundToInt(Player.transform.position.z / 10f));
+            if (!(pos == LastPos))//Player get in to a new area when position is changed
+            {
+                LastPos = pos;
+                DictTemp.Clear();
+                //Check the matrix of new area around the character
+                for (int i = pos.x - 1; i < pos.x + 2; i++)
+                {
+                    for (int j = pos.y - 1; j < pos.y + 2; j++)
+                    {
+                        if (TerrainLoaded.TryGetValue((i, j), out GameObject terr))//If TerrainLoaded has already keep the gameobject of current Terrain
+                        {
+                            DictTemp.Add((i, j), terr);
+                            TerrainLoaded.Remove((i, j));
+                            terr.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                            terr.SetActive(true);
+                        }
+                        else
+                        {
+                            if (UnloadTerrCountDown.TryGetValue((i, j), out GameobjAndCoroutine val))//If UnloadTerrCountDown has already keep the gameobject of current Terrain
+                            {
+                                StopCoroutine(val.Cor);//Stop the coroutine that hides the plot, when the player leaves the plot at this time but returns to the plot within 3 seconds
+                                DictTemp.Add((i, j), val.Go);
+                                UnloadTerrCountDown.Remove((i, j));
+                                val.Go.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                                val.Go.SetActive(true);
+                            }
+                            else
+                            {
+                                var newTerr = GetTerrain();
+                                DictTemp.Add((i, j), newTerr);
+                                newTerr.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                                newTerr.SetActive(true);
+                            }
+                        }
+                    }
+                }
+                foreach (var item in TerrainLoaded)//Viewing TerrainLoaded, the objects in TerrainLoaded at this time are not in the character's current nine-square circle, so the view is ready to hide and display
+                {
+                    UnloadTerrCountDown.Add(item.Key, new GameobjAndCoroutine
+                    {
+                        Cor = StartCoroutine(RemoveTerrDelay(item.Key)),// Start the progress of floor display
+                        Go = item.Value,
+                    });
+                }
+                TerrainLoaded.Clear();
+                (TerrainLoaded, DictTemp) = (DictTemp, TerrainLoaded);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Cancle display of terrain
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
+    private IEnumerator RemoveTerrDelay((int x, int y) pos)
+    {
+        yield return new WaitForSeconds(3f);//Wait for 3 Secends to hide terrain dispaly
+        if (UnloadTerrCountDown.TryGetValue(pos, out var v))
+        {
+            RecycleTerrain(v.Go);
+            UnloadTerrCountDown.Remove(pos);
+        }
+    }
+
+    /// <summary>
+    /// Get a Terrain object
+    /// </summary>
+    /// <returns></returns>
     private GameObject GetTerrain()
     {
         if (TerrainPool.Count > 0) //Check if there is terrain in the terrain pool
@@ -76,5 +150,15 @@ public class TerrainSlicing : MonoBehaviour
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// Recycle terrain
+    /// </summary>
+    /// <param name="t"></param>
+    private void RecycleTerrain(GameObject t)
+    {
+        t.SetActive(false);
+        TerrainPool.Push(t);
     }
 }
