@@ -38,7 +38,7 @@ public class TerrainSlicing : MonoBehaviour
                 {
                     DictTemp.Add((i, j), terr);//
                     TerrainLoaded.Remove((i, j));
-                    terr.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                    terr.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                     terr.SetActive(true);
                 }
                 else
@@ -48,14 +48,14 @@ public class TerrainSlicing : MonoBehaviour
                         StopCoroutine(val.Cor);
                         DictTemp.Add((i, j), val.Go);
                         UnloadTerrCountDown.Remove((i, j));
-                        val.Go.transform.position = new Vector3(i * 11f, 0f, j * 11f);
+                        val.Go.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                         val.Go.SetActive(true);
                     }
                     else
                     {
                         var newTerr = GetTerrain(); //Generate terrain
                         DictTemp.Add((i, j), newTerr);
-                        newTerr.transform.position = new Vector3(i * 11f, 0f, j * 11f);
+                        newTerr.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                         newTerr.SetActive(true);
                     }
                 }
@@ -83,7 +83,7 @@ public class TerrainSlicing : MonoBehaviour
                         {
                             DictTemp.Add((i, j), terr);
                             TerrainLoaded.Remove((i, j));
-                            terr.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                            terr.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                             terr.SetActive(true);
                         }
                         else
@@ -93,14 +93,14 @@ public class TerrainSlicing : MonoBehaviour
                                 StopCoroutine(val.Cor);//Stop the coroutine that hides the plot, when the player leaves the plot at this time but returns to the plot within 3 seconds
                                 DictTemp.Add((i, j), val.Go);
                                 UnloadTerrCountDown.Remove((i, j));
-                                val.Go.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                                val.Go.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                                 val.Go.SetActive(true);
                             }
                             else
                             {
                                 var newTerr = GetTerrain();
                                 DictTemp.Add((i, j), newTerr);
-                                newTerr.transform.position = new Vector3(i * 10f, 0f, j * 10f);
+                                newTerr.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                                 newTerr.SetActive(true);
                             }
                         }
