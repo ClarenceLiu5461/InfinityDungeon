@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    private Vector3 PlayerRecordPos;
+    public GameObject Door = GameObject.FindWithTag("Door");
     void Start()
     {
         
@@ -14,27 +14,28 @@ public class Trigger : MonoBehaviour
     {
         
     }
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.name == "UpDoor")
         {
-            GameObject.Find("MainCamera").transform.position += new Vector3(0,0,12);
-            //this.gameObject.transform.position += new Vector3(0, 0, 3);
+            GameObject.Find("MainCamera").transform.position += new Vector3(0, 0, 12);
+            Door.SetActive(false);
         }
         if (collision.gameObject.name == "RightDoor")
         {
             GameObject.Find("MainCamera").transform.position += new Vector3(12, 0, 0);
-            //this.gameObject.transform.position += new Vector3(3, 0, 0);
+            Door.SetActive(false);
         }
         if (collision.gameObject.name == "BottomDoor")
         {
             GameObject.Find("MainCamera").transform.position += new Vector3(0, 0, -12);
-            //this.gameObject.transform.position += new Vector3(0, 0, -3);
+            Door.SetActive(false);
         }
         if (collision.gameObject.name == "LeftDoor")
         {
             GameObject.Find("MainCamera").transform.position += new Vector3(-12, 0, 0);
-            //this.gameObject.transform.position += new Vector3(-3, 0, 0);
+            Door.SetActive(false);
         }
     }
 }
