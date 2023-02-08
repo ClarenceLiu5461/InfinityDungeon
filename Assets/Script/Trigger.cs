@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    public GameObject Door = GameObject.FindWithTag("Door");
+    GameObject Door;
     void Start()
-    {
-        
+    { 
+        Door = GameObject.FindWithTag("Door");
     }
 
     void Update()
