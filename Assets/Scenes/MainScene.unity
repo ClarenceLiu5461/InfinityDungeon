@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInput: Horizontal
   verticallInput: Vertical
-  jumpInput: 32
+  jumpInput: 0
   strafeInput: 9
   sprintInput: 304
   rotateCameraXInput: Mouse X
@@ -1235,7 +1235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56937f64021c2f478628ddc49d06ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
 --- !u!1 &2029582264
 GameObject:
   m_ObjectHideFlags: 0

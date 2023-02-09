@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    public GameObject Door;
+    private GameObject Door;
     public Dictionary<string, GameObject> ObjList = new Dictionary<string, GameObject>();
     void Start()
     {
@@ -15,7 +15,7 @@ public class Trigger : MonoBehaviour
     {
         if (ObjList.ContainsKey(id))
         {
-            GameObject GetObj = ObjList[id];
+             Door= ObjList[id];
         }
     }
 
