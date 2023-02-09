@@ -267,6 +267,7 @@ MonoBehaviour:
   TerrParent: {fileID: 1162135777}
   TerrainObj: {fileID: 990540082871152419, guid: f147ce7a64d284e4f8f1291f34a5f8b5, type: 3}
   Player: {fileID: 2010150939}
+  MainCamera: {fileID: 963194225}
 --- !u!1 &670564484
 GameObject:
   m_ObjectHideFlags: 0

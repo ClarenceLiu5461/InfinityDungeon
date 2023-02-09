@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    GameObject Door;
+    public GameObject Door;
+    public Dictionary<string, GameObject> ObjList = new Dictionary<string, GameObject>();
     void Start()
     { 
-        Door = GameObject.FindWithTag("Door");
+
     }
 
     void Update()
@@ -19,22 +20,18 @@ public class Trigger : MonoBehaviour
     {
         if (collision.gameObject.name == "UpDoor")
         {
-            GameObject.Find("MainCamera").transform.position += new Vector3(0, 0, 12);
             Door.SetActive(false);
         }
         if (collision.gameObject.name == "RightDoor")
         {
-            GameObject.Find("MainCamera").transform.position += new Vector3(12, 0, 0);
             Door.SetActive(false);
         }
         if (collision.gameObject.name == "BottomDoor")
         {
-            GameObject.Find("MainCamera").transform.position += new Vector3(0, 0, -12);
             Door.SetActive(false);
         }
         if (collision.gameObject.name == "LeftDoor")
         {
-            GameObject.Find("MainCamera").transform.position += new Vector3(-12, 0, 0);
             Door.SetActive(false);
         }
     }

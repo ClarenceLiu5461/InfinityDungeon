@@ -7,6 +7,7 @@ public class TerrainSlicing : MonoBehaviour
     public Transform TerrParent; //Tarrain parent
     public GameObject TerrainObj; //Tarrain prefab
     public GameObject Player; //Player
+    public GameObject MainCamera; //Camera
 
     private Dictionary<(int x, int y), GameObject> TerrainLoaded; //Remove already loaded terrain
     private Dictionary<(int x, int y), GameObject> DictTemp; //Record temporarily stored terrain
@@ -73,6 +74,7 @@ public class TerrainSlicing : MonoBehaviour
             if (!(pos == LastPos))//Player get in to a new area when position is changed
             {
                 LastPos = pos;
+                MainCamera.transform.position = new Vector3(Mathf.RoundToInt(Player.transform.position.x / 10f)*12, 12, Mathf.RoundToInt(Player.transform.position.z / 10f)*12);
                 DictTemp.Clear();
                 //Check the matrix of new area around the character
                 for (int i = pos.x - 1; i < pos.x + 2; i++)
