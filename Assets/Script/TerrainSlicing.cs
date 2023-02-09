@@ -70,11 +70,11 @@ public class TerrainSlicing : MonoBehaviour
         if (Player != null)
         {
             //Record player position on the map
-            (int x, int y) pos = (Mathf.RoundToInt(Player.transform.position.x / 10f), Mathf.RoundToInt(Player.transform.position.z / 10f));
+            (int x, int y) pos = (Mathf.RoundToInt(Player.transform.position.x / 12f), Mathf.RoundToInt(Player.transform.position.z / 12f));
             if (!(pos == LastPos))//Player get in to a new area when position is changed
             {
                 LastPos = pos;
-                MainCamera.transform.position = new Vector3(Mathf.RoundToInt(Player.transform.position.x / 10f)*12, 12, Mathf.RoundToInt(Player.transform.position.z / 10f)*12);
+                MainCamera.transform.position = new Vector3(pos.x*12, 12, pos.y*12);
                 DictTemp.Clear();
                 //Check the matrix of new area around the character
                 for (int i = pos.x - 1; i < pos.x + 2; i++)
@@ -145,6 +145,7 @@ public class TerrainSlicing : MonoBehaviour
     {
         if (TerrainPool.Count > 0) //Check if there is terrain in the terrain pool
         {
+            
             return TerrainPool.Pop(); //Remove one of the terrains
         }
         return Instantiate(TerrainObj, TerrParent); //Generate 1 terrain object
