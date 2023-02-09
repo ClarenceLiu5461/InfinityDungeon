@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    private GameObject Door;
+    public GameObject NewObj;
     public Dictionary<string, GameObject> ObjList = new Dictionary<string, GameObject>();
     void Start()
     {
-        ObjList.Add("Door",Door);
+        ObjList.Add("Door",NewObj);
     }
 
     public void GetObj(string id)
     {
         if (ObjList.ContainsKey(id))
         {
-             Door= ObjList[id];
+            NewObj = ObjList[id];
         }
     }
 
@@ -29,19 +29,19 @@ public class Trigger : MonoBehaviour
         GetObj("Door");
         if (collision.gameObject.name == "UpDoor")
         {
-            Door.SetActive(false);
+            NewObj.SetActive(false);
         }
         if (collision.gameObject.name == "RightDoor")
         {
-            Door.SetActive(false);
+            NewObj.SetActive(false);
         }
         if (collision.gameObject.name == "BottomDoor")
         {
-            Door.SetActive(false);
+            NewObj.SetActive(false);
         }
         if (collision.gameObject.name == "LeftDoor")
         {
-            Door.SetActive(false);
+            NewObj.SetActive(false);
         }
     }
 }

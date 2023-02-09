@@ -37,7 +37,7 @@ public class TerrainSlicing : MonoBehaviour
             {
                 if (TerrainLoaded.TryGetValue((i, j), out GameObject terr)) //Check if the terrain at the current location has been loaded
                 {
-                    DictTemp.Add((i, j), terr);//
+                    DictTemp.Add((i, j), terr);
                     TerrainLoaded.Remove((i, j));
                     terr.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                     terr.SetActive(true);

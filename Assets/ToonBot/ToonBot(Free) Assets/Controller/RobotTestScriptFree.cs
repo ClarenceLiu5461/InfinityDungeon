@@ -4,7 +4,6 @@ using System.Collections;
 public class RobotTestScriptFree : MonoBehaviour {
 
 	private Animator anim;
-	private float jumpTimer = 0;
 
 	void Start () {
 	
