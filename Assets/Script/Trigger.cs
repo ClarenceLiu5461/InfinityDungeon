@@ -20,11 +20,6 @@ public class Trigger : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.name == "UpDoor")

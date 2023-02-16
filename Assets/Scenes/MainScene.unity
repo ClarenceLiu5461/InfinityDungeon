@@ -1060,7 +1060,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2010150946}
   - component: {fileID: 2010150945}
-  - component: {fileID: 2010150944}
   - component: {fileID: 2010150943}
   - component: {fileID: 2010150942}
   - component: {fileID: 2010150941}
@@ -1174,18 +1173,6 @@ MonoBehaviour:
   groundMinDistance: 0.25
   groundMaxDistance: 0.5
   slopeLimit: 75
---- !u!114 &2010150944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010150939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 578fb81742dfe884f9eab351270faa80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &2010150945
 Animator:
   serializedVersion: 4
