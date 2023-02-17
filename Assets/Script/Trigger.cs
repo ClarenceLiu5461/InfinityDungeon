@@ -22,20 +22,20 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject.name == "UpDoor")
+        if (collision.gameObject.name == "Up")
         {
-            ObjList["Door"].SetActive(false);
+            Door.SetActive(false);
             Debug.Log("Bruh"); //Make sure it's available
         }
-        if (collision.gameObject.name == "RightDoor")
+        if (collision.gameObject.name == "Right")
         {
             Door.SetActive(false);
         }
-        if (collision.gameObject.name == "BottomDoor")
+        if (collision.gameObject.name == "Bottom")
         {
             Door.SetActive(false);
         }
-        if (collision.gameObject.name == "LeftDoor")
+        if (collision.gameObject.name == "Left")
         {
             Door.SetActive(false);
         }
