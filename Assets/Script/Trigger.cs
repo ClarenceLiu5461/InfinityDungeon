@@ -8,15 +8,22 @@ public class Trigger : MonoBehaviour
     public Dictionary<string, GameObject> ObjList = new Dictionary<string, GameObject>();
     void Start()
     {
-        //ObjList.Add("Door",Door);
-        //GetObj("Door");
+        ObjList.Add("UpDoor", UpDoor);               //Add UpDoor
+        ObjList.Add("RightDoor", RightDoor);       //Add RightDoor
+        ObjList.Add("BottomDoor", BottomDoor); //Add BottomDoor
+        ObjList.Add("LeftDoor", LeftDoor);           //Add LeftDoor
+        AddItem("UpDoor");
+        AddItem("RightDoor");
+        AddItem("BottomDoor");
+        AddItem("LeftDoor");
     }
 
-    public void GetObj(string name)
+    //Make sure keys exist
+    public void AddItem(string name)
     {
         if (ObjList.ContainsKey(name))
         {
-            //Door = ObjList[name];
+            Debug.Log(name + "Exists");
         }
     }
 
@@ -24,7 +31,7 @@ public class Trigger : MonoBehaviour
     {
         if (collision.gameObject.name == "Up")
         {
-            UpDoor.SetActive(false);
+            ObjList["UpDoor"].SetActive(false);
             Debug.Log("Bruh"); //Make sure it's available
         }
         if (collision.gameObject.name == "Right")
