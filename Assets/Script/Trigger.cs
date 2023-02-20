@@ -5,25 +5,22 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     public GameObject UpDoor,RightDoor,BottomDoor,LeftDoor;
-    public Dictionary<string, GameObject> ObjList = new Dictionary<string, GameObject>();
+    public Dictionary<string, GameObject> ObjList = new Dictionary<string, GameObject>(); //Dictionary which keeps doors
     void Start()
     {
         ObjList.Add("UpDoor", UpDoor);               //Add UpDoor
         ObjList.Add("RightDoor", RightDoor);       //Add RightDoor
         ObjList.Add("BottomDoor", BottomDoor); //Add BottomDoor
         ObjList.Add("LeftDoor", LeftDoor);           //Add LeftDoor
-        AddItem("UpDoor");
-        AddItem("RightDoor");
-        AddItem("BottomDoor");
-        AddItem("LeftDoor");
     }
 
     //Make sure keys exist
-    public void AddItem(string name)
+    public void SetDoor(string name)
     {
         if (ObjList.ContainsKey(name))
         {
-            Debug.Log(name + "Exists");
+            ObjList[name].SetActive(false);
+            Debug.Log(name+"Exists");
         }
     }
 
@@ -31,20 +28,19 @@ public class Trigger : MonoBehaviour
     {
         if (collision.gameObject.name == "Up")
         {
-            ObjList["UpDoor"].SetActive(false);
-            Debug.Log("Bruh"); //Make sure it's available
+            SetDoor("UpDoor");
         }
         if (collision.gameObject.name == "Right")
         {
-            RightDoor.SetActive(false);
+            SetDoor("RightDoor");
         }
         if (collision.gameObject.name == "Bottom")
         {
-            BottomDoor.SetActive(false);
+            SetDoor("BottomDoor");
         }
         if (collision.gameObject.name == "Left")
         {
-            LeftDoor.SetActive(false);
+            SetDoor("LeftDoor");
         }
     }
 }

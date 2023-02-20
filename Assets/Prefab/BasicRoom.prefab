@@ -575,6 +575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 992489909039702761, guid: 2fc99dbdd72bbe54a87dedec6c21b1b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3077294682162178173, guid: 2fc99dbdd72bbe54a87dedec6c21b1b3, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -764,6 +768,10 @@ PrefabInstance:
     - target: {fileID: 9051098521790014411, guid: 89011ce39a4560246a1c96d2726543d5, type: 3}
       propertyPath: m_Name
       value: BottomDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051098521790014411, guid: 89011ce39a4560246a1c96d2726543d5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89011ce39a4560246a1c96d2726543d5, type: 3}
