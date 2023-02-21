@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 787179888068732280, guid: dd02dcfea1600384cbf65fd10d62df4f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1373314658783921202, guid: dd02dcfea1600384cbf65fd10d62df4f, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -556,6 +560,10 @@ PrefabInstance:
     - target: {fileID: 7010561820150401332, guid: 168ca4471d18e1044ac7af834e91611a, type: 3}
       propertyPath: m_Name
       value: RightDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7010561820150401332, guid: 168ca4471d18e1044ac7af834e91611a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 168ca4471d18e1044ac7af834e91611a, type: 3}
