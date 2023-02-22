@@ -1,0 +1,82 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int numInputs, numGates, i, j;
+            Random rnd = new Random();
+
+            Console.Write("Enter the number of inputs: ");
+            numInputs = int.Parse(Console.ReadLine());
+            Console.Write("Enter the number of gates: ");
+            numGates = int.Parse(Console.ReadLine());
+
+            int[] inputs = new int[numInputs];
+            int[] gates = new int[numGates];
+            string[] usedGates = new string[numGates];
+
+            // Generate random inputs
+            for (i = 0; i < numInputs; i++)
+            {
+                inputs[i] = rnd.Next(2);
+                Console.WriteLine("Input " + (i + 1) + ": " + inputs[i]);
+            }
+
+            // Generate random gates
+            for (i = 0; i < numGates; i++)
+            {
+                gates[i] = rnd.Next(6);
+                Console.WriteLine("Gate " + (i + 1) + ": " + gates[i]);
+            }
+
+            int output = gates[0];
+            int usedGateCount = 0;
+            for (i = 1; i < numGates; i++)
+            {
+                int input1 =inputs[rnd.Next(numInputs)];
+                int input2 = inputs[rnd.Next(numInputs)];
+                if (gates[i] == 0)
+                {
+                    output = input1 & input2;
+                    usedGates[usedGateCount++] = "AND";
+                }
+                else if (gates[i] == 1)
+                {
+                    output = input1 | input2;
+                    usedGates[usedGateCount++] = "OR";
+                }
+                else if (gates[i] == 2)
+                {
+                    output = ~input1;
+                    usedGates[usedGateCount++] = "NOT";
+                }
+                else if (gates[i] == 3)
+                {
+                    output = ~(input1 & input2);
+                    usedGates[usedGateCount++] = "NAND";
+                }
+                else if (gates[i] == 4)
+                {
+                    output = ~(input1 | input2);
+                    usedGates[usedGateCount++] = "NOR";
+                }
+                else if (gates[i] == 5)
+                {
+                    output = (input1 == input2) ? 1 : 0;
+                    usedGates[usedGateCount++] = "XNOR";
+                }
+            }
+
+            Console.WriteLine("Output: " + output);
+            Console.Write("Used Gates: ");
+            for (i = 0; i < usedGateCount; i++)
+            {
+                Console.Write(usedGates[i] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
