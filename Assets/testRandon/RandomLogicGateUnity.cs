@@ -6,12 +6,12 @@ public class RandomLogicGateUnity : MonoBehaviour
     // 定義邏輯閘的類型
     enum GateType
     {
-        AND,
+      /*  AND,
         OR,
         NOT,
         NAND,
-        NOR,
-        XNOR
+      */  NOR,
+        //XNOR
     }
 
     int numInputs, numGates;
@@ -51,7 +51,7 @@ public class RandomLogicGateUnity : MonoBehaviour
 
             switch (gates[i])
             {
-                case GateType.AND:
+            /*    case GateType.AND:
                     output = input1 & input2;
                     break;
                 case GateType.OR:
@@ -63,17 +63,18 @@ public class RandomLogicGateUnity : MonoBehaviour
                 case GateType.NAND:
                     output = ~(input1 & input2);
                     break;
-                case GateType.NOR:
+              */  case GateType.NOR:
                     output = ~(input1 | input2);
                     break;
-                case GateType.XNOR:
+           /*     case GateType.XNOR:
                     output = (input1 == input2) ? 1 : 0;
                     break;
-                default:
-                    break;
+                default:  
+                    break;  */  
             }
+            Debug.Log("Output: " + output);
         }
 
-        Debug.Log("Output: " + output);
+   
     }
 }
