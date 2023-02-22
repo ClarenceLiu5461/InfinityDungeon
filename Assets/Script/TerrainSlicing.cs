@@ -15,6 +15,8 @@ public class TerrainSlicing : MonoBehaviour
     private Stack<GameObject> TerrainPool;
     private (int x, int y) LastPos = (0, 0); //Player's last position
 
+    public Trigger SetTrigger;
+
     struct GameobjAndCoroutine
     {
         public GameObject Go;
