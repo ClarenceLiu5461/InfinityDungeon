@@ -8,14 +8,13 @@ public class TerrainSlicing : MonoBehaviour
     public GameObject TerrainObj; //Tarrain prefab
     public GameObject Player; //Player
     public GameObject MainCamera; //Camera
+    public GameObject Point; //Point
 
     private Dictionary<(int x, int y), GameObject> TerrainLoaded; //Remove already loaded terrain
     private Dictionary<(int x, int y), GameObject> DictTemp; //Record temporarily stored terrain
     private Dictionary<(int x, int y), GameobjAndCoroutine> UnloadTerrCountDown; //Upcoming Terrain Records for Hidden Display
     private Stack<GameObject> TerrainPool;
     private (int x, int y) LastPos = (0, 0); //Player's last position
-
-    public Trigger SetTrigger;
 
     struct GameobjAndCoroutine
     {
@@ -77,6 +76,7 @@ public class TerrainSlicing : MonoBehaviour
             {
                 LastPos = pos;
                 MainCamera.transform.position = new Vector3(pos.x*12, 12, pos.y*12);
+                Point.transform.position = new Vector3(pos.x * 12, 12, pos.y * 12);
                 DictTemp.Clear();
                 //Check the matrix of new area around the character
                 for (int i = pos.x - 1; i < pos.x + 2; i++)
