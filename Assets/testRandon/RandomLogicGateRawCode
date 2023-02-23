@@ -1,0 +1,63 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Random rnd = new Random();
+        int numInputs = rnd.Next(1, 8);
+        int numGates = rnd.Next(1, 8);
+
+        Console.WriteLine($"Number of inputs: {numInputs}");
+        Console.WriteLine($"Number of gates: {numGates}");
+
+        int[] inputs = new int[numInputs];
+        int[] gates = new int[numGates];
+        string[] usedGates = new string[numGates];
+
+        // Generate random inputs
+        for (int i = 0; i < numInputs; i++)
+        {
+            inputs[i] = rnd.Next(2);
+            Console.WriteLine($"Input {i + 1}: {inputs[i]}");
+        }
+
+        // Generate random gates
+        for (int i = 0; i < numGates; i++)
+        {
+            gates[i] = rnd.Next(6);
+            Console.WriteLine($"Gate {i + 1}: {gates[i]}");
+        }
+
+        int output = 0;
+        int usedGateCount = 0;
+        for (int i = 0; i < numGates; i++)
+        {
+            int input1 = inputs[rnd.Next(numInputs)];
+            int input2 = inputs[rnd.Next(numInputs)];
+
+            string usedGate = "";
+            switch (gates[i])
+            {
+                case 0: output = input1 & input2; usedGate = "AND"; break;
+                case 1: output = input1 | input2; usedGate = "OR"; break;
+                case 2: output = input1 ^ 1; usedGate = "NOT"; break;
+                case 3: output = (input1 & input2) ^ 1; usedGate = "NAND"; break;
+                case 4: output = (input1 | input2) ^ 1; usedGate = "NOR"; break;
+                case 5: output = (input1 == input2) ? 1 : 0; usedGate = "XNOR"; break;
+            }
+
+            usedGates[usedGateCount++] = usedGate;
+        }
+        
+        Console.WriteLine($"Output: {output}");
+    
+        Console.Write("Used Gates: ");
+        for (int i = 0; i < usedGateCount; i++)
+        {
+            Console.Write($"{usedGates[i]} ");
+        }
+        Console.WriteLine();
+      
+    }
+}
