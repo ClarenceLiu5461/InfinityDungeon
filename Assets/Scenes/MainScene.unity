@@ -260,7 +260,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603120701}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 379aeaf726b4b5c4eadd1c6b4fc6a043, type: 3}
   m_Name: 
@@ -269,7 +269,7 @@ MonoBehaviour:
   TerrainObj: {fileID: 990540082871152419, guid: f147ce7a64d284e4f8f1291f34a5f8b5, type: 3}
   Player: {fileID: 2010150939}
   MainCamera: {fileID: 963194225}
-  SetTrigger: {fileID: 2010150947}
+  SetTrigger: {fileID: 0}
 --- !u!114 &603120704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,12 +277,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603120701}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ee0a40af0b965f4f9e9c4a5ffd248fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetTrigger: {fileID: 2010150947}
+  GetTrigger: {fileID: 0}
   Room: {fileID: 990540082871152419, guid: f147ce7a64d284e4f8f1291f34a5f8b5, type: 3}
   CreateRoom: {fileID: 0}
 --- !u!1 &670564484
@@ -1081,7 +1081,6 @@ GameObject:
   - component: {fileID: 2010150942}
   - component: {fileID: 2010150941}
   - component: {fileID: 2010150940}
-  - component: {fileID: 2010150947}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1227,22 +1226,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2010150947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010150939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e56937f64021c2f478628ddc49d06ebc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpDoor: {fileID: 992489909039702761, guid: 2fc99dbdd72bbe54a87dedec6c21b1b3, type: 3}
-  RightDoor: {fileID: 7010561820150401332, guid: 168ca4471d18e1044ac7af834e91611a, type: 3}
-  BottomDoor: {fileID: 9051098521790014411, guid: 89011ce39a4560246a1c96d2726543d5, type: 3}
-  LeftDoor: {fileID: 787179888068732280, guid: dd02dcfea1600384cbf65fd10d62df4f, type: 3}
 --- !u!1 &2029582264
 GameObject:
   m_ObjectHideFlags: 0
