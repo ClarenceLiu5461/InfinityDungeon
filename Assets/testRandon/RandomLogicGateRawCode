@@ -1,46 +1,61 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GateController : MonoBehaviour
 {
-    void Start()
+    public Text numInputsText;
+    public Text numGatesText;
+    public Text usedGatesText;
+    public Button generateButton;
+
+    private int numInputs;
+    private int numGates;
+    private List<int> inputs;
+    private List<int> gates;
+    private List<string> usedGates;
+
+    private void Start()
     {
-        GenerateGate();
+        // Initialize variables
+        numInputs = 0;
+        numGates = 0;
+        inputs = new List<int>();
+        gates = new List<int>();
+        usedGates = new List<string>();
+
+        // Set button click listener
+        generateButton.onClick.AddListener(GenerateRandomInputsAndGates);
     }
 
-    void GenerateGate()
+    private void GenerateRandomInputsAndGates()
     {
-        System.Random rnd = new System.Random();
-        int numInputs = rnd.Next(1, 8);
-        int numGates = rnd.Next(1, 8);
-
-        Debug.Log($"Number of inputs: {numInputs}");
-        Debug.Log($"Number of gates: {numGates}");
-
-        int[] inputs = new int[numInputs];
-        int[] gates = new int[numGates];
-        string[] usedGates = new string[numGates];
+        // Generate random number of inputs and gates
+        numInputs = Random.Range(1, 8);
+        numGates = Random.Range(1, 8);
 
         // Generate random inputs
+        inputs.Clear();
         for (int i = 0; i < numInputs; i++)
         {
-            inputs[i] = rnd.Next(2);
-            Debug.Log($"Input {i + 1}: {inputs[i]}");
+            inputs.Add(Random.Range(0, 2));
         }
 
         // Generate random gates
+        gates.Clear();
         for (int i = 0; i < numGates; i++)
         {
-            gates[i] = rnd.Next(6);
-            Debug.Log($"Gate {i + 1}: {gates[i]}");
+            gates.Add(Random.Range(0, 6));
         }
 
+        // Calculate output and used gates
         int output = 0;
-        int usedGateCount = 0;
+        usedGates.Clear();
         for (int i = 0; i < numGates; i++)
         {
-            int input1 = inputs[rnd.Next(numInputs)];
-            int input2 = inputs[rnd.Next(numInputs)];
+            int input1 = inputs[Random.Range(0, numInputs)];
+            int input2 = inputs[Random.Range(0, numInputs)];
 
             string usedGate = "";
             switch (gates[i])
@@ -53,15 +68,12 @@ public class GateController : MonoBehaviour
                 case 5: output = (input1 == input2) ? 1 : 0; usedGate = "XNOR"; break;
             }
 
-            usedGates[usedGateCount++] = usedGate;
+            usedGates.Add(usedGate);
         }
 
-        Debug.Log($"Output: {output}");
-
-        Debug.Log("Used Gates: ");
-        for (int i = 0; i < usedGateCount; i++)
-        {
-            Debug.Log($"{usedGates[i]} ");
-        }
+        // Update UI components
+        numInputsText.text = "Number of inputs: " + numInputs;
+        numGatesText.text = "Number of gates: " + numGates;
+        usedGatesText.text = "Used Gates: " + string.Join(", ", usedGates);
     }
 }
