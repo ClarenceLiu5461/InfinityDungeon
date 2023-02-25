@@ -8,7 +8,8 @@ public class TerrainSlicing : MonoBehaviour
     public GameObject TerrainObj; //Tarrain prefab
     public GameObject Player; //Player
     public GameObject MainCamera; //Camera
-    public GameObject Point; //Point
+    public GameObject GeneratePoint; //GeneratePoint
+    
 
     private Dictionary<(int x, int y), GameObject> TerrainLoaded; //Remove already loaded terrain
     private Dictionary<(int x, int y), GameObject> DictTemp; //Record temporarily stored terrain
@@ -72,11 +73,13 @@ public class TerrainSlicing : MonoBehaviour
         {
             //Record player position on the map
             (int x, int y) pos = (Mathf.RoundToInt(Player.transform.position.x / 12f), Mathf.RoundToInt(Player.transform.position.z / 12f));
-            if (!(pos == LastPos))//Player get in to a new area when position is changed
+            //Player get in to a new area when position is changed
+            if (!(pos == LastPos))
             {
                 LastPos = pos;
                 MainCamera.transform.position = new Vector3(pos.x*12, 12, pos.y*12);
-                Point.transform.position = new Vector3(pos.x * 12, 12, pos.y * 12);
+                GeneratePoint.transform.position = new Vector3(pos.x * 12, 1, pos.y * 12);
+                
                 DictTemp.Clear();
                 //Check the matrix of new area around the character
                 for (int i = pos.x - 1; i < pos.x + 2; i++)
@@ -131,7 +134,7 @@ public class TerrainSlicing : MonoBehaviour
     /// <returns></returns>
     private IEnumerator RemoveTerrDelay((int x, int y) pos)
     {
-        yield return new WaitForSeconds(3f);//Wait for 3 Secends to hide terrain dispaly
+        yield return new WaitForSeconds(3f); //Wait for 3 Secends to hide terrain dispaly
         if (UnloadTerrCountDown.TryGetValue(pos, out var v))
         {
             RecycleTerrain(v.Go);
@@ -151,10 +154,6 @@ public class TerrainSlicing : MonoBehaviour
             return TerrainPool.Pop(); //Remove one of the terrains
         }
         return Instantiate(TerrainObj, TerrParent); //Generate 1 terrain object
-    }
-    void Update()
-    {
-        
     }
 
     /// <summary>
