@@ -1,15 +1,21 @@
 using System;
+using UnityEngine;
 
-class Program
+public class GateController : MonoBehaviour
 {
-    static void Main(string[] args)
+    void Start()
     {
-        Random rnd = new Random();
+        GenerateGate();
+    }
+
+    void GenerateGate()
+    {
+        System.Random rnd = new System.Random();
         int numInputs = rnd.Next(1, 8);
         int numGates = rnd.Next(1, 8);
 
-        Console.WriteLine($"Number of inputs: {numInputs}");
-        Console.WriteLine($"Number of gates: {numGates}");
+        Debug.Log($"Number of inputs: {numInputs}");
+        Debug.Log($"Number of gates: {numGates}");
 
         int[] inputs = new int[numInputs];
         int[] gates = new int[numGates];
@@ -19,14 +25,14 @@ class Program
         for (int i = 0; i < numInputs; i++)
         {
             inputs[i] = rnd.Next(2);
-            Console.WriteLine($"Input {i + 1}: {inputs[i]}");
+            Debug.Log($"Input {i + 1}: {inputs[i]}");
         }
 
         // Generate random gates
         for (int i = 0; i < numGates; i++)
         {
             gates[i] = rnd.Next(6);
-            Console.WriteLine($"Gate {i + 1}: {gates[i]}");
+            Debug.Log($"Gate {i + 1}: {gates[i]}");
         }
 
         int output = 0;
@@ -49,15 +55,13 @@ class Program
 
             usedGates[usedGateCount++] = usedGate;
         }
-        
-        Console.WriteLine($"Output: {output}");
-    
-        Console.Write("Used Gates: ");
+
+        Debug.Log($"Output: {output}");
+
+        Debug.Log("Used Gates: ");
         for (int i = 0; i < usedGateCount; i++)
         {
-            Console.Write($"{usedGates[i]} ");
+            Debug.Log($"{usedGates[i]} ");
         }
-        Console.WriteLine();
-      
     }
 }
