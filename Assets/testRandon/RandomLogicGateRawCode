@@ -1,3 +1,4 @@
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class GateController : MonoBehaviour
     public Text numInputsText;
     public Text numGatesText;
     public Text usedGatesText;
+    public Text outputText;
+    public Text InputsText;
     public Button generateButton;
 
     private int numInputs;
@@ -52,6 +55,7 @@ public class GateController : MonoBehaviour
         // Calculate output and used gates
         int output = 0;
         usedGates.Clear();
+        StringBuilder inputAndGateBuilder = new StringBuilder();
         for (int i = 0; i < numGates; i++)
         {
             int input1 = inputs[Random.Range(0, numInputs)];
@@ -69,11 +73,15 @@ public class GateController : MonoBehaviour
             }
 
             usedGates.Add(usedGate);
+            inputAndGateBuilder.AppendFormat("Input{0}: {1}, Input{2}: {3} \n",
+                                              i * 2 + 1, input1, i * 2 + 2, input2, i + 1);
         }
 
         // Update UI components
         numInputsText.text = "Number of inputs: " + numInputs;
         numGatesText.text = "Number of gates: " + numGates;
         usedGatesText.text = "Used Gates: " + string.Join(", ", usedGates);
+        outputText.text = "Output: " + output;
+         
     }
 }
