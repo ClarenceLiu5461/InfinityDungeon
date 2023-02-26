@@ -66,14 +66,16 @@ public class ScorePath : MonoBehaviour
             Debug.Log("Path Exists");
             Score++;
             audiosource.PlayOneShot(RightWay);
-            Destroy(collision.gameObject);
+            Destroy(Path.gameObject);
+            Destroy(Minus.gameObject);
             GeneratePath();
         }
         if (collision.gameObject.tag == "Minus")
         {
             Debug.Log("Minus Exists");
             audiosource.PlayOneShot(WrongWay);
-            Destroy(collision.gameObject);
+            Destroy(Path.gameObject);
+            Destroy(Minus.gameObject);
             GeneratePath();
         }
     }

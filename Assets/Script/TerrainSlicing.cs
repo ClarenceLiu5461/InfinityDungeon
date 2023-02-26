@@ -37,7 +37,8 @@ public class TerrainSlicing : MonoBehaviour
         {
             for (int j = -1; j < 2; j++)
             {
-                if (TerrainLoaded.TryGetValue((i, j), out GameObject terr)) //Check if the terrain at the current location has been loaded
+                //Check if the terrain at the current location has been loaded
+                if (TerrainLoaded.TryGetValue((i, j), out GameObject terr))
                 {
                     DictTemp.Add((i, j), terr);
                     TerrainLoaded.Remove((i, j));
@@ -46,7 +47,8 @@ public class TerrainSlicing : MonoBehaviour
                 }
                 else
                 {
-                    if (UnloadTerrCountDown.TryGetValue((i, j), out GameobjAndCoroutine val)) //Check if UnloadTerrCountDown has already stored the game object of the terrain
+                    //Check if UnloadTerrCountDown has already stored the game object of the terrain
+                    if (UnloadTerrCountDown.TryGetValue((i, j), out GameobjAndCoroutine val))
                     {
                         StopCoroutine(val.Cor);
                         DictTemp.Add((i, j), val.Go);
@@ -56,7 +58,8 @@ public class TerrainSlicing : MonoBehaviour
                     }
                     else
                     {
-                        var newTerr = GetTerrain(); //Generate terrain
+                        //Generate terrain
+                        var newTerr = GetTerrain();
                         DictTemp.Add((i, j), newTerr);
                         newTerr.transform.position = new Vector3(i * 12f, 0f, j * 12f);
                         newTerr.SetActive(true);
@@ -86,7 +89,8 @@ public class TerrainSlicing : MonoBehaviour
                 {
                     for (int j = pos.y - 1; j < pos.y + 2; j++)
                     {
-                        if (TerrainLoaded.TryGetValue((i, j), out GameObject terr))//If TerrainLoaded has already keep the gameobject of current Terrain
+                        //If TerrainLoaded has already keep the gameobject of current Terrain
+                        if (TerrainLoaded.TryGetValue((i, j), out GameObject terr))
                         {
                             DictTemp.Add((i, j), terr);
                             TerrainLoaded.Remove((i, j));
@@ -95,9 +99,11 @@ public class TerrainSlicing : MonoBehaviour
                         }
                         else
                         {
-                            if (UnloadTerrCountDown.TryGetValue((i, j), out GameobjAndCoroutine val))//If UnloadTerrCountDown has already keep the gameobject of current Terrain
+                            //If UnloadTerrCountDown has already keep the gameobject of current Terrain
+                            if (UnloadTerrCountDown.TryGetValue((i, j), out GameobjAndCoroutine val))
                             {
-                                StopCoroutine(val.Cor);//Stop the coroutine that hides the plot, when the player leaves the plot at this time but returns to the plot within 3 seconds
+                                //Stop the coroutine that hides the plot, when the player leaves the plot at this time but returns to the plot within 3 seconds
+                                StopCoroutine(val.Cor);
                                 DictTemp.Add((i, j), val.Go);
                                 UnloadTerrCountDown.Remove((i, j));
                                 val.Go.transform.position = new Vector3(i * 12f, 0f, j * 12f);
@@ -113,11 +119,13 @@ public class TerrainSlicing : MonoBehaviour
                         }
                     }
                 }
-                foreach (var item in TerrainLoaded)//Viewing TerrainLoaded, the objects in TerrainLoaded at this time are not in the character's current nine-square circle, so the view is ready to hide and display
+                //Viewing TerrainLoaded, the objects in TerrainLoaded at this time are not in the character's current nine-square circle, so the view is ready to hide and display
+                foreach (var item in TerrainLoaded)
                 {
                     UnloadTerrCountDown.Add(item.Key, new GameobjAndCoroutine
                     {
-                        Cor = StartCoroutine(RemoveTerrDelay(item.Key)),// Start the progress of floor display
+                        // Start the progress of floor display
+                        Cor = StartCoroutine(RemoveTerrDelay(item.Key)),
                         Go = item.Value,
                     });
                 }
@@ -134,7 +142,8 @@ public class TerrainSlicing : MonoBehaviour
     /// <returns></returns>
     private IEnumerator RemoveTerrDelay((int x, int y) pos)
     {
-        yield return new WaitForSeconds(3f); //Wait for 3 Secends to hide terrain dispaly
+        //Wait for 3 Secends to hide terrain dispaly
+        yield return new WaitForSeconds(3f);
         if (UnloadTerrCountDown.TryGetValue(pos, out var v))
         {
             RecycleTerrain(v.Go);
@@ -148,12 +157,14 @@ public class TerrainSlicing : MonoBehaviour
     /// <returns></returns>
     private GameObject GetTerrain()
     {
-        if (TerrainPool.Count > 0) //Check if there is terrain in the terrain pool
+        //Check if there is terrain in the terrain pool
+        if (TerrainPool.Count > 0)
         {
-            
-            return TerrainPool.Pop(); //Remove one of the terrains
+            //Remove one of the terrains
+            return TerrainPool.Pop();
         }
-        return Instantiate(TerrainObj, TerrParent); //Generate 1 terrain object
+        //Generate 1 terrain object
+        return Instantiate(TerrainObj, TerrParent);
     }
 
     /// <summary>
