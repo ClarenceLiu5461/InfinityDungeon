@@ -13,7 +13,9 @@ public class ScorePath : MonoBehaviour
     AudioSource audiosource;
 
     private Vector3 Pposition; //GeneratePoint's last position
+    private int combo = 0;
     private int Score = 0;
+    private int time = 0;
     void Start()
     {
         //Generate the first path
@@ -22,6 +24,13 @@ public class ScorePath : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
     }
 
+    public void Combo()
+    {
+        if (combo == 5)
+        {
+            time += 5;
+        }
+    }
     public void GeneratePath()
     {
         //Clear PathList
@@ -68,7 +77,7 @@ public class ScorePath : MonoBehaviour
         if (collision.gameObject.tag == "Path")
         {
             Debug.Log("Path Exists");
-            Score++;
+            Score++; combo++;
             audiosource.PlayOneShot(RightWay);
             for (int i = 0;i < 4 ;i++)
             {
@@ -79,6 +88,7 @@ public class ScorePath : MonoBehaviour
         if (collision.gameObject.tag == "Minus")
         {
             Debug.Log("Minus Exists");
+            combo = 0;
             audiosource.PlayOneShot(WrongWay);
             for (int i = 0; i < 4; i++)
             {
