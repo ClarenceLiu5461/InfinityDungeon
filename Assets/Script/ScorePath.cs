@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class ScorePath : MonoBehaviour
 {
-    int Score = 0;
     public GameObject Path;
     public GameObject Minus;
     public GameObject GeneratePoint;
     public AudioClip RightWay;
     public AudioClip WrongWay;
+    public Dictionary<int, GameObject> PathList = new Dictionary<int, GameObject>(); //Dictionary which keeps paths
     AudioSource audiosource;
 
     private Vector3 Pposition; //GeneratePoint's last position
+    private int Score = 0;
     void Start()
     {
         //Generate the first path
         GeneratePath();
+        //Get AudioSource
         audiosource = GetComponent<AudioSource>();
     }
 
     public void GeneratePath()
     {
+        //Clear PathList
+        PathList.Clear();
         //Change GeneratePoint position when it's changed
         Pposition = GeneratePoint.transform.position;
         int way = Random.Range(0, 4);
@@ -30,31 +34,31 @@ public class ScorePath : MonoBehaviour
         {
             case 0:
                 Debug.Log("Up");
-                Instantiate(Path, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity);
+                PathList.Add(0,Instantiate(Path, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity));
+                PathList.Add(1,Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity));
+                PathList.Add(2,Instantiate(Minus, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity));
+                PathList.Add(3,Instantiate(Minus, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity));
                 break;
             case 1:
                 Debug.Log("Bottom");
-                Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity);
-                Instantiate(Path, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity);
+                PathList.Add(0, Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity));
+                PathList.Add(1, Instantiate(Path, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity));
+                PathList.Add(2, Instantiate(Minus, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity));
+                PathList.Add(3, Instantiate(Minus, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity));
                 break;
             case 2:
                 Debug.Log("Left");
-                Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity);
-                Instantiate(Path, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity);
+                PathList.Add(0, Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity));
+                PathList.Add(1, Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity));
+                PathList.Add(2, Instantiate(Path, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity));
+                PathList.Add(3, Instantiate(Minus, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity));
                 break;
             case 3:
                 Debug.Log("Right");
-                Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity);
-                Instantiate(Minus, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity);
-                Instantiate(Path, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity);
+                PathList.Add(0, Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z + 8), Quaternion.identity));
+                PathList.Add(1, Instantiate(Minus, new Vector3(Pposition.x, Pposition.y, Pposition.z - 8), Quaternion.identity));
+                PathList.Add(2, Instantiate(Minus, new Vector3(Pposition.x - 8, Pposition.y, Pposition.z), Quaternion.identity));
+                PathList.Add(3, Instantiate(Path, new Vector3(Pposition.x + 8, Pposition.y, Pposition.z), Quaternion.identity));
                 break;
         }
     }
@@ -66,16 +70,20 @@ public class ScorePath : MonoBehaviour
             Debug.Log("Path Exists");
             Score++;
             audiosource.PlayOneShot(RightWay);
-            Destroy(Path.gameObject);
-            Destroy(Minus.gameObject);
+            for (int i = 0;i < 4 ;i++)
+            {
+                Destroy(PathList[i].gameObject);
+            }
             GeneratePath();
         }
         if (collision.gameObject.tag == "Minus")
         {
             Debug.Log("Minus Exists");
             audiosource.PlayOneShot(WrongWay);
-            Destroy(Path.gameObject);
-            Destroy(Minus.gameObject);
+            for (int i = 0; i < 4; i++)
+            {
+                Destroy(PathList[i].gameObject);
+            }
             GeneratePath();
         }
     }
